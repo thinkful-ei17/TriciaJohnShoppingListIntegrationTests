@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const router = express.Router();
 
@@ -5,7 +7,7 @@ const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 
 
-const {Recipes} = require('./models');
+const { Recipes } = require('./models');
 
 // we're going to add some recipes to Recipes
 // so there's some data to look at
@@ -27,10 +29,10 @@ router.get('/', (req, res) => {
 router.post('/', jsonParser, (req, res) => {
   // ensure `name` and `budget` are in request body
   const requiredFields = ['name', 'ingredients'];
-  for (let i=0; i<requiredFields.length; i++) {
+  for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
+      const message = `Missing \`${field}\` in request body`;
       console.error(message);
       return res.status(400).send(message);
     }
@@ -53,10 +55,10 @@ router.delete('/:id', (req, res) => {
 // call `Recipes.updateItem` with updated recipe.
 router.put('/:id', jsonParser, (req, res) => {
   const requiredFields = ['name', 'ingredients', 'id'];
-  for (let i=0; i<requiredFields.length; i++) {
+  for (let i = 0; i < requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
-      const message = `Missing \`${field}\` in request body`
+      const message = `Missing \`${field}\` in request body`;
       console.error(message);
       return res.status(400).send(message);
     }
@@ -75,6 +77,6 @@ router.put('/:id', jsonParser, (req, res) => {
     ingredients: req.body.ingredients
   });
   res.status(204).end();
-})
+});
 
 module.exports = router;
