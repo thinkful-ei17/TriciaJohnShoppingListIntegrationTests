@@ -225,13 +225,13 @@ describe('Recipes', function() {
     // request to the app, we update it with an `id` property so
     // we can make a second, PUT call to the app.
     const updateData = {
-      name: 'foo',
-      checked: true
+      name: 'pie',
+      ingredients: ['1 cup pears', '2 cups cinnamon', 'pinch of vinegar']
     };
 
     return chai.request(app)
     // first have to get so we have an idea of object to update
-      .get('/shopping-list')
+      .get('/recipes')
       .then(function(res) {
         updateData.id = res.body[0].id;
         // this will return a promise whose value will be the response
@@ -240,7 +240,7 @@ describe('Recipes', function() {
         // returning a promise and chaining with `then`, but we find
         // this approach cleaner and easier to read and reason about.
         return chai.request(app)
-          .put(`/shopping-list/${updateData.id}`)
+          .put(`/recipes/${updateData.id}`)
           .send(updateData);
       })
     // prove that the PUT request has right status code
@@ -257,10 +257,10 @@ describe('Recipes', function() {
     return chai.request(app)
     // first have to get so we have an `id` of item
     // to delete
-      .get('/shopping-list')
+      .get('/recipes')
       .then(function(res) {
         return chai.request(app)
-          .delete(`/shopping-list/${res.body[0].id}`);
+          .delete(`/recipes/${res.body[0].id}`);
       })
       .then(function(res) {
         res.should.have.status(204);
