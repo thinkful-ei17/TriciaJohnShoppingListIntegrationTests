@@ -3,4 +3,5 @@ node_js: node
 deploy:
   provider: heroku
   api_key:  0aee3054-fa93-4ac1-a24c-e635613eda46
+  on: tests-for-recipes
   app: intense-headland-14103
