@@ -1,3 +1,6 @@
 language: node_js
 node_js: node
-deploy: intense-headland-14103
+deploy:
+  provider: heroku
+  api_key:  0aee3054-fa93-4ac1-a24c-e635613eda46
+  app: intense-headland-14103
